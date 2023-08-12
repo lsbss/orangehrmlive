@@ -1,5 +1,3 @@
-import time
-
 from selenium.webdriver.common.by import By
 
 from pages.PageObject import PageObject
@@ -11,8 +9,7 @@ class AdminPage(PageObject):
     btn_lapis = 'bi-pencil-fill'
     btn_reset = 'button--ghost'
     btn_pesquisar = 'left-space'
-    menu_buzz = '[href="/web/index.php/buzz/viewBuzz"]'
-    imput_user_name = "(//input[contains(@class,'oxd-input oxd-input--active')])[2]"
+    input_user_name = "(//input[contains(@class,'oxd-input oxd-input--active')])[2]"
 
     def __init__(self, driver):
         super(AdminPage, self).__init__(driver=driver)
@@ -33,4 +30,4 @@ class AdminPage(PageObject):
         self.driver.find_element(By.CSS_SELECTOR, self.btn_pesquisar).click()
 
     def digitar_nome_do_usuario(self, user_name='Grupo_6_Teste'):
-        self.driver.find_element(By.XPATH, self.imput_user_name).send_keys(user_name)
+        self.driver.find_element(By.XPATH, self.input_user_name).send_keys(user_name)
