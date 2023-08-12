@@ -11,4 +11,10 @@ class Test_ct001:
         admin_page = AdminPage(driver=menu_page.driver)
         admin_page.click_btn_adicionar()
         save_system_user_page = SaveSystemUserPage(driver=admin_page.driver)
+<<<<<<< Updated upstream
         save_system_user_page.select_user_role()
+=======
+        admin_page.set_role_admin()
+        admin_page.set_employee_name()
+        time.sleep(5)
+>>>>>>> Stashed changes
