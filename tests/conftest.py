@@ -14,7 +14,7 @@ def select_browser(request):
 
 @pytest.fixture
 def setup(select_browser):
-    login_page = LoginPage(driver=LoginPage)
+    login_page = LoginPage()
     yield login_page
     login_page.close()
 

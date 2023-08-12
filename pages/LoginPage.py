@@ -9,8 +9,8 @@ class LoginPage(PageObject):
     element_password = 'password'
     login_button = 'oxd-button'
 
-    def __init__(self,driver):
-        super(LoginPage, self).__init__(driver=driver)
+    def __init__(self):
+        super(LoginPage, self).__init__()
         self.driver.get(self.url)
 
     def click_login_btn(self):
