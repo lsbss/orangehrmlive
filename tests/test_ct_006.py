@@ -1,4 +1,3 @@
-import time
 from pages.AdminPage import AdminPage
 from pages.MenuPage import MenuPage
 
