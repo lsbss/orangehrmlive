@@ -1,5 +1,4 @@
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.select import Select
 
 from pages.PageObject import PageObject
 
@@ -8,15 +7,11 @@ class AdminPage(PageObject):
     btn_adicionar_usuario = 'bi-plus'
     btn_lixeira = 'bi-trash'
     btn_lapis = 'bi-pencil-fill'
-    btn_reset = 'button--ghost'
-    btn_pesquisar = 'left-space'
+    btn_pesquisar = "//button[normalize-space()='Search']"
     input_user_name = "(//input[contains(@class,'oxd-input oxd-input--active')])[2]"
-    #btn_reset = "//button[normalize-space()='Reset']"
-    #btn_pesquisar = "//button[normalize-space()='Search']"
-    #menu_buzz = '[href="/web/index.php/buzz/viewBuzz"]'
-    #imput_user_name = "(//input[contains(@class,'oxd-input oxd-input--active')])[2]"
-    select_user_role = "(//div[@class='oxd-select-text oxd-select-text--active'][contains(.,'-- Select --')])[1]"
-
+    btn_reset = "//button[normalize-space()='Reset']"
+    select = "(//div[@class='oxd-select-text oxd-select-text--active'][contains(.,'-- Select --')])[1]"
+    resultado_pesquisa = "//span[@class='oxd-text oxd-text--span'][contains(.,'(1) Record Found')]"
 
     def __init__(self, driver):
         super(AdminPage, self).__init__(driver=driver)
@@ -36,7 +31,7 @@ class AdminPage(PageObject):
     def click_btn_pesquisar(self):
         self.driver.find_element(By.XPATH, self.btn_pesquisar).click()
 
-    def digitar_nome_do_usuario(self, user_name='Grupo_6_Teste'):
+    def digitar_nome_do_usuario(self, user_name='Admin'):
         self.driver.find_element(By.XPATH, self.input_user_name).send_keys(user_name)
 
     def set_role_admin(self):
@@ -47,3 +42,21 @@ class AdminPage(PageObject):
 
     def set_employee_name(self):
         self.choose_drop_down_item(label='Employee Name', item_to_be_select='Lisa Andrews')
+
+    def validar_nome_da_pagina_admin_resetado(self):
+        user_name_input = self.driver.find_element(By.XPATH, self.input_user_name)
+        username_value = user_name_input.get_attribute("value")
+        return username_value == ""
+
+    def validar_user_role_selecionado(self):
+        user_role_select = self.driver.find_element(By.XPATH, self.select)
+        selected_user_role = user_role_select.get_attribute("innerText").strip()
+        return selected_user_role == "-- Select --"
+
+    def validar_status_resetado(self):
+        status_select = self.driver.find_element(By.XPATH, self.select)
+        selected_status = status_select.get_attribute("innerText").strip()
+        return selected_status == "-- Select --"
+
+    def validar_pesquisa(self):
+        return self.driver.find_element(By.XPATH, self.resultado_pesquisa).is_displayed()
