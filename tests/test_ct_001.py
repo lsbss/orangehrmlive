@@ -21,5 +21,5 @@ class Test_ct001:
         save_system_user_page.press_save_btn()
         admin_page.digitar_nome_do_usuario('Novo Usuario' + str(nome))
         admin_page.click_btn_pesquisar()
-        assert admin_page.confirm_one_result() == True
+        assert admin_page.validar_pesquisa() == True
 

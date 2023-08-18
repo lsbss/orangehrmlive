@@ -13,11 +13,11 @@ class Test_ct003:
         admin_page = AdminPage(driver=menu_page.driver)
         admin_page.digitar_nome_do_usuario('Usuario Editado')
         admin_page.click_btn_pesquisar()
-        admin_page.edit_admin()
+        admin_page.click_btn_lapis()
         nome = random.randint(1, 99)
         admin_page.digitar_nome_do_usuario(str(nome))
         save_system_user_page = SaveSystemUserPage(driver=admin_page.driver)
         save_system_user_page.press_save_btn()
         admin_page.digitar_nome_do_usuario('Usuario Editado' + str(nome))
         admin_page.click_btn_pesquisar()
-        assert admin_page.confirm_edit == True
+        assert admin_page.validar_pesquisa() == True

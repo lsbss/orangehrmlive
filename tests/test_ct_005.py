@@ -12,3 +12,4 @@ class Test_ct005:
         admin_page.set_role_admin()
         admin_page.set_status()
         admin_page.click_btn_pesquisar()
+        assert admin_page.validar_pesquisa(), "Erro na pesquisa"
