@@ -1,5 +1,3 @@
-import time
-
 from pages.BuzzPage import BuzzPage
 from pages.MenuPage import MenuPage
 
