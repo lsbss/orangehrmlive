@@ -10,4 +10,4 @@ class Test_ct009:
         buzz_page = BuzzPage(driver=menu_page.driver)
         buzz_page.click_btn_compartilhar()
         buzz_page.compartilhar_comentario()
-        assert buzz_page.validar_comentario_compartilhado()
+        assert buzz_page.validar_comentario_compartilhado(), 'Comentario não foi compartilhado'

@@ -45,5 +45,6 @@ class BuzzPage(PageObject):
         return self.driver.find_element(By.CLASS_NAME, self.btn_curtido).is_displayed()
 
     def validar_comentario_compartilhado(self):
+        self.driver.refresh()
         comentario = self.driver.find_element(By.CLASS_NAME, self.comentario_compartilhado).text
         return comentario == self.txt_comentario_adicionado
