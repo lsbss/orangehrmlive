@@ -1,3 +1,12 @@
+# Equipe
+```
+Nome:Leonardo Santa Barbara
+Nome:Mateus Rocha Franco
+Nome:Thiago Cesar Andrade
+```
+# Web application (link)
+https://opensource-demo.orangehrmlive.com/
+
 # orangehrmlive
 projeto final testes de sistemas com selenium
 
