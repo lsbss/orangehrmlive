@@ -1,3 +1,5 @@
+import time
+
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 
@@ -21,4 +23,5 @@ class SaveSystemUserPage(PageObject):
 
     def press_save_btn(self):
         self.driver.find_element(By.CSS_SELECTOR, self.btn_save).click()
+
 

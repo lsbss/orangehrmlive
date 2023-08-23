@@ -1,4 +1,8 @@
+from selenium.webdriver.support import expected_conditions as EC
+
+
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
 
 from pages.PageObject import PageObject
 
@@ -7,17 +11,17 @@ class AdminPage(PageObject):
     btn_adicionar_usuario = 'bi-plus'
     btn_lixeira = 'bi-trash'
     btn_lapis = 'bi-pencil-fill'
-    btn_pesquisar = "//button[normalize-space()='Search']"
+    btn_pesquisar = "//button[@type='submit'][contains(.,'Search')]"
     btn_reset = "//button[normalize-space()='Reset']"
     select = "(//div[@class='oxd-select-text oxd-select-text--active'][contains(.,'-- Select --')])[1]"
     input_user_name = "(//input[contains(@class,'oxd-input oxd-input--active')])[2]"
-    delete_user = "div[class*='oxd-table-cell-actions'] > button:nth-of-type(1)"
     edit_user = "div[class*='oxd-table-cell-actions'] > button:nth-of-type(2)"
     confirm_delete = "button[class*='oxd-button--label-danger']"
     select_user_role = "(//div[@class='oxd-select-text oxd-select-text--active'][contains(.,'-- Select --')])[1]"
     not_found = "//span[@class='oxd-text oxd-text--span'][contains(.,'No Records Found')]"
     search_result = "//span[@class='oxd-text oxd-text--span'][contains(.,'(1) Record Found')]"
-    employee_name_column = "//i[contains(@class,'oxd-icon bi-sort-alpha-down oxd-icon-button__icon oxd-table-header-sort-icon')]"
+    employee_name_column = ("//i[contains(@class,'oxd-icon bi-sort-alpha-down oxd-icon-button__icon "
+                            "oxd-table-header-sort-icon')]")
     ascending = '//*[@id="app"]/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div[1]/div/div[2]/div/div/ul/li[1]/span'
     first_employee_name = "(//div[contains(.,'Aaliyah Haq')])[13]"
 
@@ -31,13 +35,19 @@ class AdminPage(PageObject):
         self.driver.find_element(By.CSS_SELECTOR, self.btn_lixeira).click()
 
     def click_btn_lapis(self):
-        self.driver.find_element(By.CSS_SELECTOR, self.btn_lapis).click()
+        WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located((By.CLASS_NAME, self.btn_lapis))
+        )
+        self.driver.find_element(By.CLASS_NAME, self.btn_lapis).click()
 
     def click_btn_reset(self):
         self.driver.find_element(By.XPATH, self.btn_reset).click()
 
     def click_btn_pesquisar(self):
-        self.driver.find_element(By.CSS_SELECTOR, self.btn_pesquisar).click()
+        WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located((By.XPATH, self.btn_pesquisar))
+        )
+        self.driver.find_element(By.XPATH, self.btn_pesquisar).click()
 
     def digitar_nome_do_usuario(self, user_name='Admin'):
         self.driver.find_element(By.XPATH, self.input_user_name).send_keys(user_name)
@@ -52,7 +62,10 @@ class AdminPage(PageObject):
         self.select_autocomplete_option(label='Employee Name', item_to_be_select='Lisa Andrews')
 
     def delete_admin(self):
-        self.driver.find_element(By.CSS_SELECTOR, self.delete_user).click()
+        WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located((By.CLASS_NAME, self.btn_lixeira))
+        )
+        self.driver.find_element(By.CLASS_NAME, self.btn_lixeira).click()
 
     def confirm_delete_admin(self):
         self.driver.find_element(By.CSS_SELECTOR, self.confirm_delete).click()
@@ -86,3 +99,10 @@ class AdminPage(PageObject):
 
     def validar_pesquisa(self):
         return self.driver.find_element(By.XPATH, self.search_result).is_displayed()
+
+    def validar_btn_pesquisar(self):
+        WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located((By.XPATH, self.btn_pesquisar))
+        )
+        return self.driver.find_element(By.XPATH, self.btn_pesquisar).is_displayed()
+
