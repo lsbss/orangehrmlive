@@ -1,13 +1,8 @@
-import time
-
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.select import Select
-
 from pages.PageObject import PageObject
 
 
 class SaveSystemUserPage(PageObject):
-
     input_password = "div[class*='user-password-cell'] > div > div:nth-of-type(2) > input"
     input_confirm_password = ("div[class*='user-password-row'] > div > div:nth-of-type(2) > div > div:nth-of-type(2) > "
                               "input")
@@ -24,5 +19,3 @@ class SaveSystemUserPage(PageObject):
 
     def press_save_btn(self):
         self.driver.find_element(By.CSS_SELECTOR, self.btn_save).click()
-
-

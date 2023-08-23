@@ -1,5 +1,4 @@
 from selenium.webdriver.common.by import By
-
 from pages.PageObject import PageObject
 
 
@@ -7,7 +6,7 @@ class MenuPage(PageObject):
     menu_admin = '[href="/web/index.php/admin/viewAdminModule"]'
     menu_buzz = '[href="/web/index.php/buzz/viewBuzz"]'
 
-    def __init__(self,driver):
+    def __init__(self, driver):
         super(MenuPage, self).__init__(driver=driver)
 
     def click_menu_admin(self):

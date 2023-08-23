@@ -1,10 +1,7 @@
-import pytest
 from selenium.webdriver import Keys
-from selenium.webdriver.support import expected_conditions as EC
-
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
-
 from pages.PageObject import PageObject
 
 
@@ -23,8 +20,10 @@ class AdminPage(PageObject):
     search_result = "//span[@class='oxd-text oxd-text--span'][contains(.,'(1) Record Found')]"
     employee_name_column = ("//i[contains(@class,'oxd-icon bi-sort-alpha-down oxd-icon-button__icon "
                             "oxd-table-header-sort-icon')]")
-    ascending = '//*[@id="app"]/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div[1]/div/div[2]/div/div/ul/li[1]/span'
-    first_employee_name = "(//div[contains(.,'Aaliyah Haq')])[13]"
+    click_btn_ordenacao_user_name = ("//i[contains(@class,'oxd-icon bi-sort-alpha-down oxd-icon-button__icon "
+                                     "oxd-table-header-sort-icon')]")
+    first_employee_name = "(//div[contains(.,'1111')])[13]"
+    ascending = "(//span[@class='oxd-text oxd-text--span'][contains(.,'Ascending')])[1]"
 
     def __init__(self, driver):
         super(AdminPage, self).__init__(driver=driver)
@@ -63,14 +62,14 @@ class AdminPage(PageObject):
     def digitar_nome_do_usuario(self, user_name='Admin'):
         self.driver.find_element(By.XPATH, self.input_user_name).send_keys(user_name)
 
-    def set_role_admin(self):
-        self.choose_drop_down_item(label='User Role', item_to_be_select='Admin')
+    def set_role_admin(self, role_admin='Admin'):
+        self.choose_drop_down_item(label='User Role', item_to_be_select=role_admin)
 
     def set_status(self, status):
         self.choose_drop_down_item(label='Status', item_to_be_select=status)
 
     def set_employee_name(self):
-        self.select_autocomplete_option(label='Employee Name', item_to_be_select='Lisa Andrews')
+        self.select_autocomplete_option(label='Employee Name', item_to_be_select='A')
 
     def delete_admin(self):
         WebDriverWait(self.driver, 10).until(
@@ -87,10 +86,20 @@ class AdminPage(PageObject):
     def click_employee_name_column(self):
         self.driver.find_element(By.XPATH, self.employee_name_column).click()
 
-    def click_ascending(self):
+    def clicar_btn_ordenacao_user_name(self):
+        WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located((By.CLASS_NAME, self.btn_lixeira))
+
+        )
+        self.driver.find_element(By.XPATH, self.click_btn_ordenacao_user_name).click()
+
+    def click_btn_opcao_ascending(self):
         self.driver.find_element(By.XPATH, self.ascending).click()
 
     def is_ascending(self):
+        WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located((By.CLASS_NAME, self.btn_lixeira))
+        )
         return self.driver.find_element(By.XPATH, self.first_employee_name).is_displayed()
 
     def validar_nome_da_pagina_admin_resetado(self):

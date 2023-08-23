@@ -37,7 +37,7 @@ def adicionar_usuario(login_orange_hrm):
     menu_page.click_menu_admin()
     admin_page = AdminPage(driver=menu_page.driver)
     admin_page.click_btn_adicionar()
-    nome = 'Novo Usuario' + str(random.randint(1000, 1111))
+    nome = 'Novo Usuario' + str(random.randint(1, 999))
     admin_page.digitar_nome_do_usuario(nome)
     admin_page.set_role_admin()
     admin_page.set_status('Enabled')

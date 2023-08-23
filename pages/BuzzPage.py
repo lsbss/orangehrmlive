@@ -1,5 +1,4 @@
 from selenium.webdriver.common.by import By
-
 from pages.PageObject import PageObject
 
 
