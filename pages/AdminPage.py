@@ -1,5 +1,6 @@
+import pytest
+from selenium.webdriver import Keys
 from selenium.webdriver.support import expected_conditions as EC
-
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
@@ -48,6 +49,16 @@ class AdminPage(PageObject):
             EC.visibility_of_element_located((By.XPATH, self.btn_pesquisar))
         )
         self.driver.find_element(By.XPATH, self.btn_pesquisar).click()
+
+    def digitar_novo_do_usuario(self, user_name='Admin'):
+        input_element = WebDriverWait(self.driver, 10).until(
+            EC.visibility_of_element_located((By.XPATH, self.input_user_name))
+        )
+
+        input_element.click()
+        input_element.send_keys(Keys.CONTROL, "a")
+        input_element.send_keys(Keys.DELETE)
+        input_element.send_keys(user_name)
 
     def digitar_nome_do_usuario(self, user_name='Admin'):
         self.driver.find_element(By.XPATH, self.input_user_name).send_keys(user_name)
@@ -105,4 +116,3 @@ class AdminPage(PageObject):
             EC.visibility_of_element_located((By.XPATH, self.btn_pesquisar))
         )
         return self.driver.find_element(By.XPATH, self.btn_pesquisar).is_displayed()
-

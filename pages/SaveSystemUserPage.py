@@ -9,7 +9,8 @@ from pages.PageObject import PageObject
 class SaveSystemUserPage(PageObject):
 
     input_password = "div[class*='user-password-cell'] > div > div:nth-of-type(2) > input"
-    input_confirm_password = "div[class*='user-password-row'] > div > div:nth-of-type(2) > div > div:nth-of-type(2) > input"
+    input_confirm_password = ("div[class*='user-password-row'] > div > div:nth-of-type(2) > div > div:nth-of-type(2) > "
+                              "input")
     btn_save = "button[class *='oxd-button--secondary']"
 
     def __init__(self, driver):
